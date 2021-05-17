@@ -35,6 +35,17 @@ namespace Supermarket.API.Services
             return categories;
         }
 
+        public async Task<Category> GetCategoryAsync(int id)
+        {
+            var foundCategory = await _cache.GetOrCreateAsync(id, (entry) =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+                return _categoryRepository.FindByIdAsync(id);
+            });
+            //var foundCategory = await _categoryRepository.FindByIdAsync(id);
+            return foundCategory;
+        }
+
         public async Task<CategoryResponse> SaveAsync(Category category)
         {
             try

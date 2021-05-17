@@ -31,8 +31,10 @@ namespace Supermarket.API.Persistence.Contexts
             builder.Entity<Product>().HasKey(p => p.Id);
             builder.Entity<Product>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(50);
+            builder.Entity<Product>().Property(p => p.Price).IsRequired();
             builder.Entity<Product>().Property(p => p.QuantityInPackage).IsRequired();
             builder.Entity<Product>().Property(p => p.UnitOfMeasurement).IsRequired();
+            builder.Entity<Product>().Property(p => p.Rating).IsRequired();
 
             builder.Entity<Product>().HasData
             (
@@ -40,19 +42,23 @@ namespace Supermarket.API.Persistence.Contexts
                 {
                     Id = 100,
                     Name = "Apple",
+                    Price = 10000,
                     QuantityInPackage = 1,
                     UnitOfMeasurement = EUnitOfMeasurement.Unity,
+                    Rating = 5,
                     CategoryId = 100
                 },
                 new Product
                 {
                     Id = 101,
                     Name = "Milk",
+                    Price = 20000,
                     QuantityInPackage = 2,
                     UnitOfMeasurement = EUnitOfMeasurement.Liter,
+                    Rating = 5,
                     CategoryId = 101,
                 }
-            );
+            ) ;;
         }
     }
 }

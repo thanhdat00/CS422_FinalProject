@@ -1671,19 +1671,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ThanhDat\\.nuget\\packages\\": {}
+    "C:\\Users\\DOH\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ThanhDat\\Downloads\\supermarket-api-master\\src\\Supermarket.API\\Supermarket.API.csproj",
+      "projectUniqueName": "C:\\Users\\DOH\\Desktop\\CS422\\CS422_FinalProject\\Supermarket.API.csproj",
       "projectName": "Supermarket.API",
-      "projectPath": "C:\\Users\\ThanhDat\\Downloads\\supermarket-api-master\\src\\Supermarket.API\\Supermarket.API.csproj",
-      "packagesPath": "C:\\Users\\ThanhDat\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ThanhDat\\Downloads\\supermarket-api-master\\src\\Supermarket.API\\obj\\",
+      "projectPath": "C:\\Users\\DOH\\Desktop\\CS422\\CS422_FinalProject\\Supermarket.API.csproj",
+      "packagesPath": "C:\\Users\\DOH\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DOH\\Desktop\\CS422\\CS422_FinalProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ThanhDat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DOH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1748,7 +1748,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

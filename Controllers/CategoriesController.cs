@@ -36,6 +36,15 @@ namespace Supermarket.API.Controllers
             return resources;
         }
 
+        // Get specific item
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(int), 100)]
+        public async Task<Category> GetCategoryAsync(int id)
+        {
+            var foundCategory = await _categoryService.GetCategoryAsync(id);
+            return foundCategory;
+        }
+
         /// <summary>
         /// Saves a new category.
         /// </summary>
