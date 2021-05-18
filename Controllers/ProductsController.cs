@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,37 @@ namespace Supermarket.API.Controllers
             return resource;
         }
 
+        [HttpGet("sortbyprice")]
+        public async Task<List<ProductResource>> SortProductByPriceAsync()
+        {
+            var products = await _productService.SortProduct("price");
+            var resource = _mapper.Map<List<Product>, List<ProductResource>> (products);
+            return resource;
+        }
+
+        [HttpGet("sortbyname")]
+        public async Task<List<ProductResource>> SortProductByNameAsync()
+        {
+            var products = await _productService.SortProduct("name");
+            var resource = _mapper.Map<List<Product>, List<ProductResource>>(products);
+            return resource;
+        }
+
+        [HttpGet("sortbyquantity")]
+        public async Task<List<ProductResource>> SortProductByQuantityAsync()
+        {
+            var products = await _productService.SortProduct("quantity");
+            var resource = _mapper.Map<List<Product>, List<ProductResource>>(products);
+            return resource;
+        }
+
+        [HttpGet("sortbyrating")]
+        public async Task<List<ProductResource>> SortProductByRatingAsync()
+        {
+            var products = await _productService.SortProduct("rating");
+            var resource = _mapper.Map<List<Product>, List<ProductResource>>(products);
+            return resource;
+        }
         /// <summary>
         /// Saves a new product.
         /// </summary>

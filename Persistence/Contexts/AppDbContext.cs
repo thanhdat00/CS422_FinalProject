@@ -8,13 +8,14 @@ namespace Supermarket.API.Persistence.Contexts
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        //public DbSet<Order> Orders { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
+
             builder.Entity<Category>().ToTable("Categories");
             builder.Entity<Category>().HasKey(p => p.Id);
             builder.Entity<Category>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();//.HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
@@ -26,6 +27,14 @@ namespace Supermarket.API.Persistence.Contexts
                 new Category { Id = 100, Name = "Fruits and Vegetables" }, // Id set manually due to in-memory provider
                 new Category { Id = 101, Name = "Dairy" }
             );
+
+            //builder.Entity<Order>().ToTable("Orders");
+            //builder.Entity<Order>().HasKey(p => p.ID);
+            //builder.Entity<Order>().Property(p => p.CustomerName).IsRequired().HasMaxLength(30);
+            //builder.Entity<Order>().Property(p => p.CustomerEmail).IsRequired().HasMaxLength(30);
+            //builder.Entity<Order>().Property(p => p.CustomerAddress).IsRequired().HasMaxLength(30);
+            //builder.Entity<Order>().Property(p => p.PaymentMethod).IsRequired();
+
 
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<Product>().HasKey(p => p.Id);
@@ -57,6 +66,36 @@ namespace Supermarket.API.Persistence.Contexts
                     UnitOfMeasurement = EUnitOfMeasurement.Liter,
                     Rating = 5,
                     CategoryId = 101,
+                },
+                new Product
+                {
+                    Id = 102,
+                    Name = "Banana",
+                    Price = 12000,
+                    QuantityInPackage = 10,
+                    UnitOfMeasurement = EUnitOfMeasurement.Unity,
+                    Rating = 2,
+                    CategoryId = 100
+                },
+                new Product
+                {
+                    Id = 103,
+                    Name = "Mango",
+                    Price = 13000,
+                    QuantityInPackage = 10,
+                    UnitOfMeasurement = EUnitOfMeasurement.Unity,
+                    Rating = 3,
+                    CategoryId = 100
+                },
+                new Product
+                {
+                    Id = 104,
+                    Name = "Banana",
+                    Price = 14000,
+                    QuantityInPackage = 10,
+                    UnitOfMeasurement = EUnitOfMeasurement.Unity,
+                    Rating = 3,
+                    CategoryId = 100
                 }
             ) ;;
         }

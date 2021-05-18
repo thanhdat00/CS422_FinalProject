@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using Supermarket.API.Domain.Models;
@@ -126,6 +127,16 @@ namespace Supermarket.API.Services
 
             key = string.Concat(key, "_", query.Page, "_", query.ItemsPerPage);
             return key;
+        }
+
+        public async Task<List<Product>> SortProduct(string type)
+        {
+            string cacheKey = type;
+            var products = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+                return _productRepository.SortProduct(type);
+            });
+            return products;
         }
     }
 }

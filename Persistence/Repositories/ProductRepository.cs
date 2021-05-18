@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Domain.Models;
 using Supermarket.API.Domain.Models.Queries;
 using Supermarket.API.Domain.Repositories;
+using Supermarket.API.Domain.SortingStrategy;
 using Supermarket.API.Persistence.Contexts;
 
 namespace Supermarket.API.Persistence.Repositories
@@ -64,5 +65,37 @@ namespace Supermarket.API.Persistence.Repositories
 		{
 			_context.Products.Remove(product);
 		}
-	}
+
+        public async Task<List<Product>> SortProduct(string type)
+        {
+			ISorting sorting;
+			List<Product> productList = await _context.Products
+											  .AsNoTracking()
+											  .ToListAsync();
+			switch (type)
+			{
+				case "name":
+					sorting = new SortByName();
+					sorting.ProductSort(ref productList);
+					break;
+				case "price":
+					sorting = new SortByPrice();
+					sorting.ProductSort(ref productList);
+					break;
+				case "quantity":
+					sorting = new SortByQuantity();
+					sorting.ProductSort(ref productList);
+					break;
+				case "rating":
+					sorting = new SortByRating();
+					sorting.ProductSort(ref productList);
+					break;
+				default:
+					sorting = new SortByPrice();
+					sorting.ProductSort(ref productList);
+					break;
+			}
+			return productList;
+        }
+    }
 }

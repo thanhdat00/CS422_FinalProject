@@ -10,6 +10,7 @@ namespace Supermarket.API.Domain.Repositories
         Task<QueryResult<Product>> ListAsync(ProductsQuery query);
         Task AddAsync(Product product);
         Task<Product> FindByIdAsync(int id);
+        Task<List<Product>> SortProduct(string type);
         void Update(Product product);
         void Remove(Product product);
     }
