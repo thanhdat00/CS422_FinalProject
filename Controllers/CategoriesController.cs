@@ -39,10 +39,21 @@ namespace Supermarket.API.Controllers
         // Get specific item
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(int), 100)]
-        public async Task<Category> GetCategoryAsync(int id)
-        {
-            var foundCategory = await _categoryService.GetCategoryAsync(id);
-            return foundCategory;
+        public async Task<List<CategoryResource>> GetCategoryAsync(string id)
+        {           
+            var isNumeric = int.TryParse(id, out int n);
+            if (isNumeric)
+            {
+                var category = await _categoryService.GetCategoryAsync(n);
+                var resource = _mapper.Map<Category, CategoryResource>(category);
+                return new List<CategoryResource> { resource };
+            }
+            else
+            {
+                var categories = await _categoryService.GetCategoryByNameAsync(id);
+                var resource = _mapper.Map<List<Category>, List<CategoryResource>>(categories);
+                return resource;
+            }
         }
 
         /// <summary>

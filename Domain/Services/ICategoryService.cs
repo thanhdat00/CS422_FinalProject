@@ -9,7 +9,8 @@ namespace Supermarket.API.Domain.Services
     {
          Task<IEnumerable<Category>> ListAsync();
          Task<Category> GetCategoryAsync(int id);
-         Task<CategoryResponse> SaveAsync(Category category);
+        Task<List<Category>> GetCategoryByNameAsync(string name);
+        Task<CategoryResponse> SaveAsync(Category category);
          Task<CategoryResponse> UpdateAsync(int id, Category category);
          Task<CategoryResponse> DeleteAsync(int id);
     }

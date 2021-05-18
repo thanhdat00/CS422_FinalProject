@@ -104,5 +104,15 @@ namespace Supermarket.API.Services
                 return new CategoryResponse($"An error occurred when deleting the category: {ex.Message}");
             }
         }
+
+        public async Task<List<Category>> GetCategoryByNameAsync(string name)
+        {
+            var categories = await _cache.GetOrCreateAsync(name, (entry) => {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+                return _categoryRepository.FindByNameAsync(name);
+            });
+
+            return categories;
+        }
     }
 }

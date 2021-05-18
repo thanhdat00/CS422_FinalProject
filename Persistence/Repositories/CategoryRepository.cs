@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Domain.Models;
@@ -39,6 +40,12 @@ namespace Supermarket.API.Persistence.Repositories
         public void Remove(Category category)
         {
             _context.Categories.Remove(category);
+        }
+
+        public async Task<List<Category>> FindByNameAsync(string name)
+        {
+            IQueryable<Category> queryable = _context.Categories.Where(p => p.Name == name);
+            return await queryable.ToListAsync();
         }
     }
 }
