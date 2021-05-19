@@ -8,7 +8,8 @@ namespace Supermarket.API.Persistence.Contexts
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        //public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -27,15 +28,16 @@ namespace Supermarket.API.Persistence.Contexts
                 new Category { Id = 100, Name = "Fruits and Vegetables" }, // Id set manually due to in-memory provider
                 new Category { Id = 101, Name = "Dairy" }
             );
+            
+            // Create Orders table
+            builder.Entity<Order>().ToTable("Orders");
+            builder.Entity<Order>().HasKey(p => p.ID);
+            builder.Entity<Order>().Property(p => p.CustomerName).IsRequired().HasMaxLength(30);
+            builder.Entity<Order>().Property(p => p.CustomerEmail).IsRequired().HasMaxLength(30);
+            builder.Entity<Order>().Property(p => p.CustomerAddress).IsRequired().HasMaxLength(30);
+            builder.Entity<Order>().Property(p => p.PaymentMethod).IsRequired();
 
-            //builder.Entity<Order>().ToTable("Orders");
-            //builder.Entity<Order>().HasKey(p => p.ID);
-            //builder.Entity<Order>().Property(p => p.CustomerName).IsRequired().HasMaxLength(30);
-            //builder.Entity<Order>().Property(p => p.CustomerEmail).IsRequired().HasMaxLength(30);
-            //builder.Entity<Order>().Property(p => p.CustomerAddress).IsRequired().HasMaxLength(30);
-            //builder.Entity<Order>().Property(p => p.PaymentMethod).IsRequired();
-
-
+            // Create Products table
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<Product>().HasKey(p => p.Id);
             builder.Entity<Product>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -44,6 +46,19 @@ namespace Supermarket.API.Persistence.Contexts
             builder.Entity<Product>().Property(p => p.QuantityInPackage).IsRequired();
             builder.Entity<Product>().Property(p => p.UnitOfMeasurement).IsRequired();
             builder.Entity<Product>().Property(p => p.Rating).IsRequired();
+
+            // Create Orders details table
+            builder.Entity<OrderDetail>().ToTable("OrderDetails");
+            builder.Entity<OrderDetail>().HasKey(sc => new { sc.ProductID, sc.OrderId });
+            builder.Entity<OrderDetail>().Property(p => p.Quantity).IsRequired();
+            builder.Entity<OrderDetail>().Property(p => p.PriceAtCheckOut).IsRequired();
+
+            //Many to many relationship between Orders and Products ( Orderdetails is attached)
+            builder.Entity<OrderDetail>().HasOne(sc => sc.Product).WithMany(s => s.OrderDetailsList)
+                             .HasForeignKey(sc => sc.ProductID);
+
+            builder.Entity<OrderDetail>().HasOne(sc => sc.Order).WithMany(s => s.OrderDetailsList)
+                                         .HasForeignKey(sc => sc.OrderId);
 
             builder.Entity<Product>().HasData
             (

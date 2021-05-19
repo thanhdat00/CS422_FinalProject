@@ -17,6 +17,9 @@ namespace Supermarket.API.Mapping
                            opt => opt.MapFrom(src => src.UnitOfMeasurement.ToDescriptionString()));
 
             CreateMap<QueryResult<Product>, QueryResultResource<ProductResource>>();
+
+            CreateMap<Order, OrderResource>();
+            //CreateMap<OrderDetail, OrderResource>();
         }
     }
 }

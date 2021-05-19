@@ -9,6 +9,6 @@ namespace Supermarket.API.Domain.Models
         public string CustomerEmail { get; }
         public string CustomerAddress { get; }
         public EPaymentMethod PaymentMethod { get; set; }
-        //public IList<OrderDetail> OrderDetails { get; set; }
+        public IList<OrderDetail> OrderDetailsList { get; set; }
     }
 }

@@ -16,16 +16,11 @@ namespace Supermarket.API.Extensions
                 cfg.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Supermarket API",
-                    Version = "v3",
-                    Description = "Simple RESTful API built with ASP.NET Core 3.1 to show how to create RESTful services using a decoupled, maintainable architecture.",
+                    Description = "CS422 Project",
                     Contact = new OpenApiContact
                     {
                         Name = "Thành Đạt Facebook",
                         Url = new Uri("https://www.facebook.com/thanhdat.taeyeon/")
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "MIT",
                     },
                 });
 

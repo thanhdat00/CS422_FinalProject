@@ -14,6 +14,6 @@ namespace Supermarket.API.Domain.Models
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        //public IList<OrderDetail> orderDetails { get; set; }
+        public IList<OrderDetail> OrderDetailsList { get; set; }
     }
 }
